@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ConfigureOutputResistance</title>
+  </head>
+  <body>
+    <h1>agb2900_ConfigureOutputResistance</h1>
+    <p class="syntax">
+      ViStatus agb2900_ConfigureOutputResistance (ViSession instrumentHandle,
+                                            ViInt32 channel,
+                                            ViInt32 outputMode,
+                                            ViInt32 operationMode,
+                                            ViConstString _VI_FAR listOfSourceType[],
+                                            ViInt32 listOfSourceTypeSize,
+                                            ViInt32 listOfOutputDataSize,
+                                            ViReal64 _VI_FAR listOfOutputData[],
+                                            ViReal64 shuntResistanceLevel,
+                                            ViReal64 seriesResistanceLevel,
+                                            ViBoolean enableProgrammableOutput);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Configures the output resistance.
+    <br/>
+    Note:
+    <br/>
+    This function is only supported by B296x family models B2961A/B2962A, B2961B/B2962B, and B2961C/B2962C.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function.&nbsp;&nbsp;The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">channel</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specified channel to perform action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1 (B2901BL, B2910BL, B2901B, B2911B, B2961B)
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_2: Channel 2 (B2902B, B2912B, B2962B)
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">outputMode</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Sets the source output mode of the specified channel.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_SOURCE_OUTPUT_MODE_CURRENT: Current. Sets the specified channel to the current source.
+    <br/>
+    AGB2900_SOURCE_OUTPUT_MODE_VOLTAGE: Voltage. Sets the specified channel to the voltage source.
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_SOURCE_OUTPUT_MODE_VOLTAGE: Voltage
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">operationMode</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Selects the operation mode of the programmable output resistance function.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_RESISTANCE_OPERATION_MODE_FIXED: Fixed. The fixed mode which uses the constant output resistance.
+    <br/>
+    AGB2900_RESISTANCE_OPERATION_MODE_EMULATE: Emulate. The emulation mode which uses the user-specified voltage and current lists.
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_RESISTANCE_OPERATION_MODE_FIXED: Fixed
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">listOfSourceType</td>
+        <td class="paramDataType">ViConstString[]</td>
+        <td>
+    Sets the source type list used for the emulation mode operation of the programmable output resistance function.
+    <br/>
+    Valid Range:
+    <br/>
+    List must contain 1 to 15 data. Each data must be separated by a comma, for example: list=VOLT,VOLT.
+    <br/>
+    Default Value:
+    <br/>
+    VI_NULL
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">listOfSourceTypeSize</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Sets the size of source type list.
+    <br/>
+    Valid Range:
+    <br/>
+    1 to 15
+    <br/>
+    Default Value:
+    <br/>
+    1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">listOfOutputDataSize</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Sets the size of output data list.
+    <br/>
+    Valid Range:
+    <br/>
+    2 to 16
+    <br/>
+    Default Value:
+    <br/>
+    2
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">listOfOutputData</td>
+        <td class="paramDataType">ViReal64[]</td>
+        <td>
+    Sets the current or voltage list used for performing the emulation mode operation of the programmable output resistance function.
+    <br/>
+    Valid Range:
+    <br/>
+    List must contain 2 to 16 data. Number of data must be the number of data in the source type list plus 1. Each data must be separated by a comma, for example: list=0.1,0.2,0.3.
+    <br/>
+    Default Value:
+    <br/>
+    VI_NULL
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">shuntResistanceLevel</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    Sets the shunt resistance (constant value) used for the fixed mode operation of the programmable output resistance function.
+    <br/>
+    Valid Range:
+    <br/>
+    0.2 Ohm to 2G Ohm
+    <br/>
+    Default Value:
+    <br/>
+    2000000000 Ohm
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">seriesResistanceLevel</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    Sets the series resistance (constant value) used for the fixed mode operation of the programmable output resistance function.
+    <br/>
+    Valid Range:
+    <br/>
+    -20M to +20M Ohm
+    <br/>
+    Default Value:
+    <br/>
+    0 Ohm
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">enableProgrammableOutput</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Enables or disables the programmable output resistance function.
+    <br/>
+    Valid Values:
+    <br/>
+    VI_TRUE:&nbsp;&nbsp;Enable. Enables the trigger output.
+    <br/>
+    VI_FALSE: Disable. Disables the trigger output.
+    <br/>
+    Default Value:
+    <br/>
+    VI_FALSE: Disable
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassSource%20Output.html">Source Output</a><br/>
+      <a href="ClassConfigure.html">Configure</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

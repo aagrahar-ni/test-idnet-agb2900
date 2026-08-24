@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ConfigureSource</title>
+  </head>
+  <body>
+    <h1>agb2900_ConfigureSource</h1>
+    <p class="syntax">
+      ViStatus agb2900_ConfigureSource (ViSession instrumentHandle, ViInt32 channel,
+                                  ViInt32 outputMode, ViInt32 outputFunction,
+                                  ViReal64 outputLevel,
+                                  ViReal64 triggerOutputLevel,
+                                  ViReal64 outputRange,
+                                  ViBoolean continuousTriggerEnabled);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Configures output level, output mode, and enables or disables the output for specified channel of the power sourcing.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function.&nbsp;&nbsp;The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">channel</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specified channel to perform action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1 (B2901BL, B2910BL, B2901B, B2911B, B2961B)
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_2: Channel 2 (B2902B, B2912B, B2962B)
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">outputMode</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    The source output mode of the specified channel.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_SOURCE_OUTPUT_MODE_CURRENT: Current. Sets the specified channel to the current source.
+    <br/>
+    AGB2900_SOURCE_OUTPUT_MODE_VOLTAGE: Voltage. Sets the specified channel to the voltage source.
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_SOURCE_OUTPUT_MODE_VOLTAGE: Voltage
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">outputFunction</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    The source output shape of the specified channel.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_SOURCE_OUTPUT_FUNCTION_PLUS: Pulse Sets the specified channel to the const output.(Pulse output is not available for B2901BL and B2910BL)
+    <br/>
+    AGB2900_SOURCE_OUTPUT_FUNCTION_DC: DC Sets the specified channel to the pulsed output.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    Default Value: AGB2900_SOURCE_OUTPUT_FUNCTION_DC: DC
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">outputLevel</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    The output level of the specified source channel which will be changed immediately.
+    <br/>
+    Valid Range:
+    <br/>
+    When Source is set to voltage:
+    <br/>
+    Range&nbsp;&nbsp;&nbsp;| Output Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Setting Resolution
+    <br/>
+    value&nbsp;&nbsp;&nbsp;| in V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| B290XA/B290XB&nbsp;&nbsp;| B291XA/B291XB | B2961B/B2962B
+    <br/>
+    0.2V&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=0.21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0.1uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;0.1 uV
+    <br/>
+    2V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1uV
+    <br/>
+    20V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uV
+    <br/>
+    200V&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=210&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1mV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100uV
+    <br/>
+    For B2901BL,B2910BL
+    <br/>
+    Range&nbsp;&nbsp;&nbsp;| Output Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Setting Resolution
+    <br/>
+    value&nbsp;&nbsp;&nbsp;| in V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| B2901BL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| B2910BL
+    <br/>
+    0.2V&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=0.21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0.1uV
+    <br/>
+    2V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uV
+    <br/>
+    ------------------------------------------------------------
+    <br/>
+    20V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100uV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100uV
+    <br/>
+    |&nbsp;&nbsp;6&lt;=|V| &lt;=21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    ------------------------------------------------------------
+    <br/>
+    200V&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V| &lt;=6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1mV
+    <br/>
+    |&nbsp;&nbsp;6&lt;=|V| &lt;=21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    | 21&lt;=|V| &lt;=210&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    ------------------------------------------------------------
+    <br/>
+    Note :200V Available for the B2910BL. Not available for the B2901BL.
+    <br/>
+    When Source is set to current:
+    <br/>
+    For B2901A and B2902A:
+    <br/>
+    Range&nbsp;&nbsp;| Output Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Setting
+    <br/>
+    value&nbsp;&nbsp;| in A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Resolution
+    <br/>
+    100nA&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1pA
+    <br/>
+    1uA&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10pA
+    <br/>
+    10uA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100pA
+    <br/>
+    100uA&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1nA
+    <br/>
+    1mA&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10nA
+    <br/>
+    10mA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100nA
+    <br/>
+    100mA&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uA
+    <br/>
+    1A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=1.05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    1.5A&nbsp;&nbsp;&nbsp;| 0&lt;=|I| &lt;=1.515&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uA
+    <br/>
+    3A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I| &lt;=3.03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100uA
+    <br/>
+    10A&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I| &lt;= 10.5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100uA
+    <br/>
+    For B2911A and B2912A:
+    <br/>
+    Range&nbsp;&nbsp;| Output Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Setting
+    <br/>
+    value&nbsp;&nbsp;| in A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Resolution
+    <br/>
+    10nA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10fA
+    <br/>
+    100nA&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100fA
+    <br/>
+    1uA&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1pA
+    <br/>
+    10uA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10pA
+    <br/>
+    100uA&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100pA
+    <br/>
+    1mA&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1nA
+    <br/>
+    10mA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10nA
+    <br/>
+    100mA&nbsp;&nbsp;| 0&lt;=|I|&lt;=105E-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 100nA
+    <br/>
+    1A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=1.05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    1.5A&nbsp;&nbsp;&nbsp;| 0&lt;=|I| &lt;=1.515&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uA
+    <br/>
+    3A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I| &lt;=3.03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uA
+    <br/>
+    10A&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I| &lt;= 10.5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uA
+    <br/>
+    For B2901B, B2902B, B2911B, and B2912B:
+    <br/>
+    Range&nbsp;&nbsp;&nbsp;| Output Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Setting Resolution&nbsp;&nbsp;
+    <br/>
+    value&nbsp;&nbsp;&nbsp;| in A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;B290XB&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;B291XB&nbsp;&nbsp;| B2961B/B2962B
+    <br/>
+    10nA&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=10.5 nA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10fA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10fA
+    <br/>
+    100nA&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=105&nbsp;&nbsp;nA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1pA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;100fA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100fA
+    <br/>
+    1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=1.05 uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10pA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1pA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1pA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    10uA&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=10.5 uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100pA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10pA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10pA
+    <br/>
+    100uA&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=105&nbsp;&nbsp;uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1nA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;100pA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100pA
+    <br/>
+    1mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=1.05 mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10nA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1nA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1nA
+    <br/>
+    10mA&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=10.5 mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100nA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10nA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10nA
+    <br/>
+    100mA&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=105 mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10 nA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 nA&nbsp;&nbsp;
+    <br/>
+    ---------------------------------------------------------------------------
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=105&nbsp;&nbsp;mA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1uA
+    <br/>
+    1A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|105 mA&lt;|I|&lt;=1.05&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    |&nbsp;&nbsp;&nbsp;0 &lt;=|I|&lt;=1.05&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    ---------------------------------------------------------------------------
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=105&nbsp;&nbsp;mA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1uA
+    <br/>
+    1.5A&nbsp;&nbsp;&nbsp;&nbsp;|105 mA&lt;|I|&lt;=1.515 A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=1.515 A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=1.05&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    ---------------------------------------------------------------------------
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=105&nbsp;&nbsp;mA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100uA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10uA
+    <br/>
+    3A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|105 mA&lt;|I|&lt;=1.515 A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100uA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+    <br/>
+    |1.515A&lt;|I|&lt;=3.03&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100uA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    ---------------------------------------------------------------------------
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=105&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100uA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10uA
+    <br/>
+    10A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;0&lt; |I|&lt;=1.515 A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100uA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=1.05&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100uA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    ---------------------------------------------------------------------------
+    <br/>
+    For B2901BL and B2910BL
+    <br/>
+    Range&nbsp;&nbsp;&nbsp;| Output Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Setting Resolution
+    <br/>
+    value&nbsp;&nbsp;&nbsp;| in A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;B290XBL&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;B291XBL
+    <br/>
+    10nA&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=10.5 nA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;100fA
+    <br/>
+    100nA&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=105&nbsp;&nbsp;nA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1nA&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=1.05 uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10pA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10pA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    10uA&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=10.5 uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100pA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10pA
+    <br/>
+    100uA&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=105&nbsp;&nbsp;uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1nA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1nA
+    <br/>
+    1mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=1.05 mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10nA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10nA
+    <br/>
+    10mA&nbsp;&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=10.5 mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;100nA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;100nA
+    <br/>
+    100mA&nbsp;&nbsp;&nbsp;|0&lt;=|I|&lt;=105&nbsp;&nbsp;mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1uA
+    <br/>
+    --------------------------------------------------------
+    <br/>
+    |&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=105&nbsp;&nbsp;&nbsp;mA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10uA
+    <br/>
+    1A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|105 mA&lt;|I|&lt;=1.05&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10uA
+    <br/>
+    --------------------------------------------------------
+    <br/>
+    1.5A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;0&lt;=|I|&lt;=105&nbsp;&nbsp;&nbsp;mA&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10uA
+    <br/>
+    | 105 mA&lt;|I|&lt;=1.515 A&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10uA&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;10uA
+    <br/>
+    --------------------------------------------------------
+    <br/>
+    Note :10nA, 100nA is Available for B2910BL, Not available for B2901BL.
+    <br/>
+    Default Value:
+    <br/>
+    2
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">triggerOutputLevel</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    The output level of the specified source channel which will be changed immediately by receiving a trigger source set by ConfigureTrigger function.
+    <br/>
+    Valid Range:
+    <br/>
+    Refer the help context for OutputLevel.
+    <br/>
+    Default Value:
+    <br/>
+    2
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">outputRange</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    The current or voltage output range of the specified source channel. This command is effective when the automatic ranging function is off.
+    <br/>
+    Valid Range:
+    <br/>
+    10nA to 10A: For current output. See help context of Output Level.
+    <br/>
+    0.2V to 200V: For voltage output. See help context of Output Level.
+    <br/>
+    Default Value:
+    <br/>
+    2 V
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">continuousTriggerEnabled</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Expected status of continuous trigger output for the specified channel
+    <br/>
+    Valid Range:
+    <br/>
+    VI_TRUE&nbsp;&nbsp;- Enables the continuous trigger output. The specified channel keeps the output level and range settings even after the grouped channels change the status from busy to idle.
+    <br/>
+    VI_FALSE - Disables the continuous trigger output. The specified channel changes the output level and range settings to the previous settings immediately when the grouped channels change the status from busy to idle.
+    <br/>
+    Default Value:
+    <br/>
+    VI_TRUE
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassSource%20Output.html">Source Output</a><br/>
+      <a href="ClassConfigure.html">Configure</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ConfigureCLTGPIOPins</title>
+  </head>
+  <body>
+    <h1>agb2900_ConfigureCLTGPIOPins</h1>
+    <p class="syntax">
+      ViStatus agb2900_ConfigureCLTGPIOPins (ViSession instrumentHandle,
+                                       ViInt32 channel,
+                                       ViBoolean _VI_FAR pinsForResultOutput[],
+                                       ViInt32 pinForBUSY, ViInt32 pinForSOT,
+                                       ViInt32 pinForEOT, ViInt32 arraySize);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Assigns the GPIO pins used for the result output, or&nbsp;&nbsp;assigns the GPIO pin for the BUSY (busy), EOT (end of test), or SOT (start of test) signal line for the composite limit test.
+    <br/>
+    Note:
+    <br/>
+    This function is not applicable for B296x family models B2961A/B2962A, B2961B/B2962B, and B2961C/B2962C.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function.&nbsp;&nbsp;The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">channel</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specified channel to perform action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1 (B2901BL, B2910BL, B2901B, B2911B, B2961B)
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_2: Channel 2 (B2902B, B2912B, B2962B)
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">pinsForResultOutput</td>
+        <td class="paramDataType">ViBoolean[]</td>
+        <td>
+    An boolean array indicates the expected GPIO pin used for the result output. The output is the pass/fail bit pattern.
+    <br/>
+    Valid Values For Each Element:
+    <br/>
+    VI_FALSE: Pass
+    <br/>
+    VI_TRUE: Fail
+    <br/>
+    Default Value:
+    <br/>
+    Empty Array
+    <br/>
+    Note:
+    <br/>
+    Non-continuous pin assignment such as pin=EXT9,EXT10,EXT14 is not effective.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">pinForBUSY</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Expected GPIO pin for the BUSY (busy) line for the composite limit test.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_PIN_EXT1:&nbsp;&nbsp;&nbsp;EXT1
+    <br/>
+    AGB2900_PIN_EXT2:&nbsp;&nbsp;&nbsp;EXT2
+    <br/>
+    AGB2900_PIN_EXT3:&nbsp;&nbsp;&nbsp;EXT3
+    <br/>
+    AGB2900_PIN_EXT4:&nbsp;&nbsp;&nbsp;EXT4
+    <br/>
+    AGB2900_PIN_EXT5:&nbsp;&nbsp;&nbsp;EXT5
+    <br/>
+    AGB2900_PIN_EXT6:&nbsp;&nbsp;&nbsp;EXT6
+    <br/>
+    AGB2900_PIN_EXT7:&nbsp;&nbsp;&nbsp;EXT7
+    <br/>
+    AGB2900_PIN_EXT8:&nbsp;&nbsp;&nbsp;EXT8
+    <br/>
+    AGB2900_PIN_EXT9:&nbsp;&nbsp;&nbsp;EXT9
+    <br/>
+    AGB2900_PIN_EXT10:&nbsp;&nbsp;EXT10
+    <br/>
+    AGB2900_PIN_EXT11:&nbsp;&nbsp;EXT11
+    <br/>
+    AGB2900_PIN_EXT12:&nbsp;&nbsp;EXT12
+    <br/>
+    AGB2900_PIN_EXT13:&nbsp;&nbsp;EXT13
+    <br/>
+    AGB2900_PIN_EXT14:&nbsp;&nbsp;EXT14
+    <br/>
+    AGB2900_PIN_NONE:&nbsp;&nbsp;&nbsp;None
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_PIN_NONE: None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">pinForSOT</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Expected GPIO pin for the SOT (start of test) line for the composite limit test.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_PIN_EXT1: EXT1
+    <br/>
+    AGB2900_PIN_EXT2: EXT2
+    <br/>
+    AGB2900_PIN_EXT3: EXT3
+    <br/>
+    AGB2900_PIN_EXT4: EXT4
+    <br/>
+    AGB2900_PIN_EXT5: EXT5
+    <br/>
+    AGB2900_PIN_EXT6: EXT6
+    <br/>
+    AGB2900_PIN_EXT7: EXT7
+    <br/>
+    AGB2900_PIN_EXT8: EXT8
+    <br/>
+    AGB2900_PIN_EXT9: EXT9
+    <br/>
+    AGB2900_PIN_EXT10: EXT10
+    <br/>
+    AGB2900_PIN_EXT11: EXT11
+    <br/>
+    AGB2900_PIN_EXT12: EXT12
+    <br/>
+    AGB2900_PIN_EXT13: EXT13
+    <br/>
+    AGB2900_PIN_EXT14: EXT14
+    <br/>
+    AGB2900_PIN_NONE: None
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_PIN_NONE: None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">pinForEOT</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Expected GPIO pin for the EOT (end of test) line for the composite limit test.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_PIN_EXT1: EXT1
+    <br/>
+    AGB2900_PIN_EXT2: EXT2
+    <br/>
+    AGB2900_PIN_EXT3: EXT3
+    <br/>
+    AGB2900_PIN_EXT4: EXT4
+    <br/>
+    AGB2900_PIN_EXT5: EXT5
+    <br/>
+    AGB2900_PIN_EXT6: EXT6
+    <br/>
+    AGB2900_PIN_EXT7: EXT7
+    <br/>
+    AGB2900_PIN_EXT8: EXT8
+    <br/>
+    AGB2900_PIN_EXT9: EXT9
+    <br/>
+    AGB2900_PIN_EXT10: EXT10
+    <br/>
+    AGB2900_PIN_EXT11: EXT11
+    <br/>
+    AGB2900_PIN_EXT12: EXT12
+    <br/>
+    AGB2900_PIN_EXT13: EXT13
+    <br/>
+    AGB2900_PIN_EXT14: EXT14
+    <br/>
+    AGB2900_PIN_NONE: None
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_PIN_NONE: None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">arraySize</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Array size of the parameter PinsForResultOutput.
+    <br/>
+    Valid Range:
+    <br/>
+    1~14
+    <br/>
+    Default Value:
+    <br/>
+    14
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassConfigure.html">Configure</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

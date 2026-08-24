@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_Initialize</title>
+  </head>
+  <body>
+    <h1>agb2900_Initialize</h1>
+    <p class="syntax">
+      ViStatus agb2900_Initialize (ViRsrc resourceName, ViBoolean IDQuery,
+                             ViBoolean reset, ViPSession instrumentHandle);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Establishes communication with the instrument and optionally performs an instrument identification query and/or an instrument reset.&nbsp;&nbsp;It also places the instrument in a default state needed for other instrument driver operations.&nbsp;&nbsp;Therefore, call this function before calling other instrument driver functions for this instrument.&nbsp;&nbsp;Generally, you need to call the agb2900_Initialize function only once at the beginning of an application.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">resourceName</td>
+        <td class="paramDataType">ViRsrc</td>
+        <td>
+    Pass the resource name of the device to initialize.
+    <br/>
+    You also can pass the name of a virtual instrument.&nbsp;&nbsp;The virtual instrument identifies a specific device and specifies the initial settings for the session.
+    <br/>
+    Refer to the following table for the exact grammar to use for this parameter. Optional fields are shown in square brackets ([]).
+    <br/>
+    Syntax
+    <br/>
+    ------------------------------------------------------
+    <br/>
+    GPIB[board]::&lt;primary address&gt;[::secondary address]::INSTR &lt;LogicalName&gt;
+    <br/>
+    If you do not specify a value for an optional field, the following values are used:
+    <br/>
+    Optional Field - Value
+    <br/>
+    ------------------------------------------------------
+    <br/>
+    board - 0
+    <br/>
+    secondary address - none (31)
+    <br/>
+    The following table contains example Valid Range for this parameter.
+    <br/>
+    Valid Range - Description
+    <br/>
+    ------------------------------------------------------
+    <br/>
+    &quot;GPIB::22::INSTR&quot; - GPIB board 0, primary address 22 no
+    <br/>
+    secondary address
+    <br/>
+    &quot;GPIB::22::5::INSTR&quot; - GPIB board 0, primary address 22
+    <br/>
+    secondary address 5
+    <br/>
+    &quot;GPIB1::22::5::INSTR&quot; - GPIB board 1, primary address 22
+    <br/>
+    secondary address 5
+    <br/>
+    Default Value:&nbsp;&nbsp;&quot;GPIB0::22::INSTR&quot;
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">IDQuery</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Specify whether you want the instrument driver to perform an
+    <br/>
+    ID Query.
+    <br/>
+    Valid Range:
+    <br/>
+    True:&nbsp;&nbsp;VI_TRUE
+    <br/>
+    False: VI_FALSE
+    <br/>
+    Default Value:
+    <br/>
+    True: VI_TRUE
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">reset</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Specify whether you want the instrument driver to reset the instrument during the initialization procedure.
+    <br/>
+    Valid Range:
+    <br/>
+    True:&nbsp;&nbsp;VI_TRUE
+    <br/>
+    False: VI_FALSE
+    <br/>
+    Default Value:
+    <br/>
+    True: VI_TRUE
+        </td>
+      </tr>
+      <tr>
+        <td valign="top"><em class="label">Output</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession (passed by reference)</td>
+        <td>
+    Returns a ViSession handle that you use to identify the instrument in all subsequent instrument driver function calls.
+    <br/>
+    Notes:
+    <br/>
+    (1) This function creates a new session each time you invoke it.&nbsp;&nbsp;This is useful if you have multiple physical instances of the same type of instrument.
+    <br/>
+    (2) Avoid creating multiple concurrent sessions to the same physical instrument.
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

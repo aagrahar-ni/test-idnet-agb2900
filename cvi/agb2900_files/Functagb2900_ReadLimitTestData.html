@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ReadLimitTestData</title>
+  </head>
+  <body>
+    <h1>agb2900_ReadLimitTestData</h1>
+    <p class="syntax">
+      ViStatus agb2900_ReadLimitTestData (ViSession instrumentHandle,
+                                    ViInt32 channel, ViInt32 offset,
+                                    ViInt32 size,
+                                    ViBoolean acquireNullOffsetEnabled,
+                                    ViPReal64 calculationData,
+                                    ViPReal64 timeStamp, ViPReal64 status,
+                                    ViBoolean _VI_FAR testFailed[],
+                                    ViInt32 testFailedSize);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Calculates the limit test data.
+    <br/>
+    Note:
+    <br/>
+    Commands in the conditional statement are not applicable for B296x family models B2961A/B2962A, B2961B/B2962B, and B2961C/B2962C.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function.&nbsp;&nbsp;The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">channel</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specified channel to perform action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1 (B2901BL, B2910BL, B2901B, B2911B, B2961B)
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_2: Channel 2 (B2902B, B2912B, B2962B)
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">offset</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Beginning of data to receive. offset=n specifies the (n+1)th data.&nbsp;&nbsp;Value 0 specifies the present data position.&nbsp;&nbsp;
+    <br/>
+    Valid Range:
+    <br/>
+    0 to maximum (depends on the buffer state).
+    <br/>
+    Default Value:
+    <br/>
+    0
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">size</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Number of data to receive. Value 0 means all data from offset is returned.
+    <br/>
+    Valid Range:
+    <br/>
+    1 to maximum (depends on the buffer state).
+    <br/>
+    Default Value:
+    <br/>
+    1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">acquireNullOffsetEnabled</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Whether or not automatically set the null offset value used for calculating the limit test data.
+    <br/>
+    Valid Range:
+    <br/>
+    VI_TRUE - Enabled. When auto-set enabled, the null offset value will be acquired immediately.
+    <br/>
+    VI_FALSE - Disabled. When auto-set disabled, the null offset value is specified by Configure Limit Test Null Offset.vi.
+    <br/>
+    Default Value:
+    <br/>
+    VI_FALSE (Disable)
+    <br/>
+    Note:
+    <br/>
+    When enabled, the null offset value is acquired only once and you need to reconfigure the auto-set value to ON if you want to acquire again.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">testFailedSize</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Sets the size of test failed.
+    <br/>
+    Valid Range:
+    <br/>
+    1 to 12
+    <br/>
+    Default Value:
+    <br/>
+    1
+        </td>
+      </tr>
+      <tr>
+        <td valign="top"><em class="label">Output</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">calculationData</td>
+        <td class="paramDataType">ViReal64 (passed by reference)</td>
+        <td>
+    Calculation Result.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">timeStamp</td>
+        <td class="paramDataType">ViReal64 (passed by reference)</td>
+        <td>
+    Time stamp of calculation data.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViReal64 (passed by reference)</td>
+        <td>
+    Status data is given by a binary-weighted sum of all bits set in the binary data.
+    <br/>
+    Bit Definitions of Status Data
+    <br/>
+    bit 0 - Source (0: Voltage; 1: Current)
+    <br/>
+    bit 1 and 2 - Compliance condition(0: No; 1, 2, 3: Yes)
+    <br/>
+    bit 3 - Over voltage condition(0: No; 1: Yes)
+    <br/>
+    bit 4 - Over current condition(0: No; 1: Yes)
+    <br/>
+    bit 5 - High temperature condition(0: No; 1: Yes)
+    <br/>
+    bit 13 - Measurement range overflow(0: No; 1: Yes)
+    <br/>
+    bit 14 - Offset compensation enable condition(0: No; 1: Yes)
+    <br/>
+    bit 15 - Contact check failure(0: No; 1: Yes)
+    <br/>
+    bit 16 to 20 - Limit test result, 0 to 31
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">testFailed</td>
+        <td class="paramDataType">ViBoolean[]</td>
+        <td>
+    An array of 12 boolean indicates the results of Limit Tests
+    <br/>
+    True - Passed
+    <br/>
+    False - Failed
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassData.html">Data</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

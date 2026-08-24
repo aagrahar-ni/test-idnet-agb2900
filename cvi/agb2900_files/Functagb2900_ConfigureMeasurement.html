@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ConfigureMeasurement</title>
+  </head>
+  <body>
+    <h1>agb2900_ConfigureMeasurement</h1>
+    <p class="syntax">
+      ViStatus agb2900_ConfigureMeasurement (ViSession instrumentHandle,
+                                       ViInt32 channel,
+                                       ViInt32 measurementMode,
+                                       ViReal64 range,
+                                       ViBoolean automaticNPLCEnabled,
+                                       ViReal64 powerLineCycle,
+                                       ViInt32 resistanceMode,
+                                       ViBoolean resistanceCompensatedEnabled);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Configures the specified measurement.
+    <br/>
+    Note:
+    <br/>
+    Commands in the outer conditional statement are not applicable for B296x family models B2961A/B2962A, B2961B/B2962B, and B2961C/B2962C.&nbsp;&nbsp;&nbsp;
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function. The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">channel</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specified channel to perform action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1 (B2901BL, B2910BL, B2901B, B2911B, B2961B)
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_2: Channel 2 (B2902B, B2912B, B2962B)
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">measurementMode</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Changes the measurement mode.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_MEASUREMENT_MODE_VOLTAGE: Voltage measurement
+    <br/>
+    AGB2900_MEASUREMENT_MODE_CURRENT: Current measurement
+    <br/>
+    AGB2900_MEASUREMENT_MODE_RESISTANCE: Resistance measurement
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_MEASUREMENT_MODE_VOLTAGE: Voltage
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">range</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    Specifies the expected measurement value, and sets the measurement range which provides the best resolution to measure the specified value.
+    <br/>
+    For voltage measurement:
+    <br/>
+    Valid Range:
+    <br/>
+    Range Value|&nbsp;&nbsp;Measurement value&nbsp;&nbsp;| Resolution
+    <br/>
+    0.2 V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V|&lt;= 0.212 V&nbsp;&nbsp;&nbsp;| 0.1 uV
+    <br/>
+    2&nbsp;&nbsp;&nbsp;V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V|&lt;= 2.12&nbsp;&nbsp;V&nbsp;&nbsp;&nbsp;| 1&nbsp;&nbsp;&nbsp;uV
+    <br/>
+    20&nbsp;&nbsp;V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V|&lt;= 21.2&nbsp;&nbsp;V&nbsp;&nbsp;&nbsp;| 10&nbsp;&nbsp;uV
+    <br/>
+    200 V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;0&lt;=|V|&lt;= 212&nbsp;&nbsp;&nbsp;V&nbsp;&nbsp;&nbsp;| 100 uV
+    <br/>
+    Note:
+    <br/>
+    (1) 200V is available for B2910BL, B2901B, B2902B, B2911B, and B2912B. Not available for B2901BL.
+    <br/>
+    For current measurement:
+    <br/>
+    Valid Range:
+    <br/>
+    Range&nbsp;&nbsp;&nbsp;| Measurement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Resolution
+    <br/>
+    value&nbsp;&nbsp;&nbsp;| Value in A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+    <br/>
+    10nA&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-10&nbsp;&nbsp;| 10fA
+    <br/>
+    100nA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-9&nbsp;&nbsp;&nbsp;| 100fA
+    <br/>
+    1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-8&nbsp;&nbsp;&nbsp;| 1pA
+    <br/>
+    10uA&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-7&nbsp;&nbsp;&nbsp;| 10pA
+    <br/>
+    100uA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-6&nbsp;&nbsp;&nbsp;| 100pA
+    <br/>
+    1mA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-5&nbsp;&nbsp;&nbsp;| 1nA
+    <br/>
+    10mA&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-4&nbsp;&nbsp;&nbsp;| 10nA
+    <br/>
+    100mA&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=106E-3&nbsp;&nbsp;&nbsp;| 100nA
+    <br/>
+    1A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=1.06&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    1.5A&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=1.53&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1uA
+    <br/>
+    3A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;=3.06&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10uA
+    <br/>
+    10A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0&lt;=|I|&lt;= 10.6&nbsp;&nbsp;&nbsp;&nbsp;| 10uA
+    <br/>
+    Note:
+    <br/>
+    (1) 10nA is only available for B2911A, B2912A, B2910BL, B2911B and B2912B. Not available for B2901BL, B2901B, B2902B and Other models.
+    <br/>
+    (2) 100nA,10A Available for B2901B, B2902B, B2911B, B2912B and B2910BL.Not
+    <br/>
+    available for B2901BL.
+    <br/>
+    (3) 3A Available for B2901BL, B2902B, B2911B, and B2912B. Not available
+    <br/>
+    for B2901BL and B2910BL.
+    <br/>
+    (4)10A Available for pulse mode. Not available for DC mode.
+    <br/>
+    For resistance measurement:
+    <br/>
+    Valid Range:
+    <br/>
+    Range&nbsp;&nbsp;&nbsp;&nbsp;| Measurement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Disp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Test
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;| Value in Ohm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Resolution&nbsp;&nbsp;| Current
+    <br/>
+    2&nbsp;&nbsp;&nbsp;Ohm&nbsp;&nbsp;| 0&nbsp;&nbsp;&nbsp;&lt; R &lt;= 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1&nbsp;&nbsp;&nbsp;uOhm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;A
+    <br/>
+    20&nbsp;&nbsp;Ohm&nbsp;&nbsp;| 2&nbsp;&nbsp;&nbsp;&lt; R &lt;= 20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10&nbsp;&nbsp;uOhm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;100 mA
+    <br/>
+    200 Ohm&nbsp;&nbsp;| 20&nbsp;&nbsp;&lt; R &lt;= 200&nbsp;&nbsp;&nbsp;&nbsp;| 100 uOhm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;10&nbsp;&nbsp;mA
+    <br/>
+    2&nbsp;&nbsp;&nbsp;KOhm | 200 &lt; R &lt;= 2E+3&nbsp;&nbsp;&nbsp;| 1&nbsp;&nbsp;&nbsp;mOhm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;mA
+    <br/>
+    20&nbsp;&nbsp;KOhm | 2E+3&lt; R &lt;= 2E+4&nbsp;&nbsp;&nbsp;| 10&nbsp;&nbsp;mOhm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;100 uA
+    <br/>
+    200 KOhm | 2E+4&lt; R &lt;= 2E+5&nbsp;&nbsp;&nbsp;| 100 mOhm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;10&nbsp;&nbsp;uA
+    <br/>
+    2&nbsp;&nbsp;&nbsp;MOhm | 2E+5&lt; R &lt;= 2E+6&nbsp;&nbsp;&nbsp;| 1&nbsp;&nbsp;&nbsp;&nbsp;Ohm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;uA
+    <br/>
+    20&nbsp;&nbsp;MOhm | 2E+6&lt; R &lt;= 2E+7&nbsp;&nbsp;&nbsp;| 10&nbsp;&nbsp;&nbsp;Ohm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;100 nA
+    <br/>
+    200 MOhm | 2E+7&lt; R &lt;= 2E+8&nbsp;&nbsp;&nbsp;| 100&nbsp;&nbsp;Ohm&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;10&nbsp;&nbsp;nA
+    <br/>
+    Note:
+    <br/>
+    (1) 20MOhm , 200MOhm: Available for B2910BL, B2901B, B2902B, B2911B, and B2912B. Not available for B2901BL.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">automaticNPLCEnabled</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Enables or disables the automatic NPLC function. If this function is enabled, the instrument automatically sets the NPLC value (integration time) suitable for the measurement range.
+    <br/>
+    Valid Range:
+    <br/>
+    VI_TRUE&nbsp;&nbsp;- Enable
+    <br/>
+    VI_FALSE - Disable
+    <br/>
+    Default Value: VI_FALSE
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">powerLineCycle</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    The number of power line cycles (NPLC) value which indicates the measurement speed. The NPLC value can be expressed by the following formula by using the integration time:
+    <br/>
+    nplc = time * power line frequency
+    <br/>
+    Valid Range:
+    <br/>
+    4E-4 to&nbsp;&nbsp;&nbsp;100 for 50Hz
+    <br/>
+    4.8E-4 to 120 for 60Hz
+    <br/>
+    Default Value:
+    <br/>
+    0.1 PLC
+    <br/>
+    Notes:
+    <br/>
+    This parameter is ignored if the Automatic NPLC Enabled.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">resistanceMode</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Selects the resistance measurement mode.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_MEASUREMENT_RESISTANCE_MODE_MANUAL: Manual is selected, the source and measurement condition must be set manually. If the resistance measurement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function is enabled, the resistance is calculated by voltage/current. The resistance measurement range cannot be set.
+    <br/>
+    AGB2900_MEASUREMENT_RESISTANCE_MODE_AUTO:&nbsp;&nbsp;&nbsp;AUTO is selected, the channel automatically sets the current source and voltage measurement if the resistance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;measurement function is enabled. The current output value and range depend on the resistance measurement range&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selected by the :SENS:RES:RANG:UPP or SENS:RES:RANG:AUTO:LLIM and :SENS:RES:RANG:AUTO:ULIM commands. And the following parameters are set automatically.
+    <br/>
+    Default value:
+    <br/>
+    AGB2900_MEASUREMENT_RESISTANCE_MODE_MANUAL: Manual
+    <br/>
+    Note:
+    <br/>
+    This parameter value is only available for the resistance measurement.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">resistanceCompensatedEnabled</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Enables or disables the offset-compensated resistance measurement. This parameter value is only available for the resistance measurement.
+    <br/>
+    Valid Range:
+    <br/>
+    VI_TRUE&nbsp;&nbsp;- Enable
+    <br/>
+    VI_FALSE - Disable
+    <br/>
+    Default Value: VI_FALSE
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassMeasurement.html">Measurement</a><br/>
+      <a href="ClassConfigure.html">Configure</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

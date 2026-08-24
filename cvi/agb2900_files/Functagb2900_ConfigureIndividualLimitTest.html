@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ConfigureIndividualLimitTest</title>
+  </head>
+  <body>
+    <h1>agb2900_ConfigureIndividualLimitTest</h1>
+    <p class="syntax">
+      ViStatus agb2900_ConfigureIndividualLimitTest (ViSession instrumentHandle,
+                                               ViInt32 channel,
+                                               ViInt32 testNumber,
+                                               ViBoolean enableIndividualLimitTest,
+                                               ViReal64 lowerLimit,
+                                               ViReal64 upperLimit,
+                                               ViInt32 testType,
+                                               ViInt32 feedMode,
+                                               ViInt32 judgementCriteria);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Configures the properties of specified limit test. The limit test means a pass/fail judgment performed while a composite limit test. The limit test result is returned by Read Limit Test Result
+    <br/>
+    Note:
+    <br/>
+    This function is not applicable for B296x family models B2961A/B2962A, B2961B/B2962B, and B2961C/B2962C.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function.&nbsp;&nbsp;The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">channel</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specified channel to perform action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1 (B2901BL, B2910BL, B2901B, B2911B, B2961B)
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_2: Channel 2 (B2902B, B2912B, B2962B)
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">testNumber</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    An integer used to specify a limit test to apply configuration.
+    <br/>
+    Valid Range:
+    <br/>
+    1~12
+    <br/>
+    Default Value:
+    <br/>
+    1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">enableIndividualLimitTest</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Expected status of the specified limit test.
+    <br/>
+    Valid Range:
+    <br/>
+    VI_TRUE:&nbsp;&nbsp;Enabled
+    <br/>
+    VI_FALSE: Disabled
+    <br/>
+    Default Value:
+    <br/>
+    VI_FALSE
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">lowerLimit</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    A lower limit used for the specified limit test.
+    <br/>
+    Valid Range:
+    <br/>
+    -9.999999E+20 to +9.999999E+20
+    <br/>
+    Default Value:
+    <br/>
+    -1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">upperLimit</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    An upper limit used for the specified limit test.
+    <br/>
+    Valid Range:
+    <br/>
+    -9.999999E+20 to +9.999999E+20
+    <br/>
+    Default Value:
+    <br/>
+    1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">testType</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Expected type of the specified limit test.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_LIMIT_TEST_TYPE_COMPLIANCE: Compliance. Sets the compliance status check which checks if the channel is in the compliance status.
+    <br/>
+    AGB2900_LIMIT_TEST_TYPE_LIMIT: Limit. Sets the limit test which checks if the measurement value is between the upper limit and the lower limit.
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_LIMIT_TEST_TYPE_LIMIT: Limit
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">feedMode</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specify which input data is used to calculate the limit test data.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_LIMIT_TEST_FEED_MODE_VOLTAGE:&nbsp;&nbsp;&nbsp;&nbsp;Voltage. Specifies the voltage measurement data.
+    <br/>
+    AGB2900_LIMIT_TEST_FEED_MODE_CURRENT:&nbsp;&nbsp;&nbsp;&nbsp;Current. Specifies the current measurement data.
+    <br/>
+    AGB2900_LIMIT_TEST_FEED_MODE_RESISTANCE: Resistance. Specifies the resistance calculation data given by the following formula.
+    <br/>
+    Resistance=Vmeas/Imeas
+    <br/>
+    Where, Vmeas is the voltage measurement data, and Imeas is the current measurement data.
+    <br/>
+    AGB2900_LIMIT_TEST_FEED_MODE_MATH: Math. Specifies the data given by a math expression. Use Configure Math Expression.vi before this VI to define a new expression or edit an old expression.
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_LIMIT_TEST_FEED_MODE_VOLTAGE: Voltage
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">judgementCriteria</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    The judgment criteria of the specified Limit Test.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_LIMIT_TEST_JUDGEMENT_CRITERIA_IN: IN. Judges limit test failure if the channel goes into the compliance state.
+    <br/>
+    AGB2900_LIMIT_TEST_JUDGEMENT_CRITERIA_OUT: OUT. Judges it failure if the channel gets out of the compliance state.
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_LIMIT_TEST_JUDGEMENT_CRITERIA_IN: IN
+    <br/>
+    Note:
+    <br/>
+    This property is only valid when Limit Test Type for specified limit test is set to Compliance.
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassLimit%20Test.html">Limit Test</a><br/>
+      <a href="ClassConfigure.html">Configure</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!-- Find and Replace all instances of 'Driver Identifer' with the Driver Identifier of your instrument driver 
+
+     Remove this note once this is complete. --><!-- Replace all the instructions that appear within the <font color="red"> tags with information about your instrument driver.  Make sure to delete the <font color="red"> tags as you fill in each line. Remove this note once this is complete.-->
+  <title>Instrument Driver Readme</title>
+</head>
+<body>
+<h2>Agilent B2900 Series Instrument Driver Readme</h2>
+<para>To rate this instrument driver, go to the driver download page on the <a href="http://www.ni.com/idnet">Instrument Driver Network</a>.</para>
+<h4>1. Overview</h4>
+<para>Instrument Driver Technology: LabVIEW Plug and Play (project-style)
+<br>Manufacturer:  Keysight (Agilent)
+<br>Supported Language(s): LabVIEW
+<br>Supported Model(s): B2901A,B2902A,B2911A,B2912A,B2961A,B2962A,B2901B,B2902B,B2911B,B2912B,B2901BL,B2910BL,B2961B,B2962B,B2901C,B2902C,B2911C,B2912C,B2901CL,B2910CL,B2961C and B2962C
+<br>Model(s) Tested: B2912A, B2962A, B2912B, B2961B, B2912C, B2962C
+<br>Interface(s): Ethernet, USB, GPIB
+<br>Firmware Revision(s) Tested: 1.0.1121.1140, 1.0.1231.944, 5.0.2029.1911, 5.0.2031.7499, 6.0.516.0, 6.0.388.0<br>
+<br>Certified: Yes
+<br>NI Supported: Yes
+<br>Source Code Available: Yes
+<br>
+<br>Driver Revision: 1.3
+<br>Original Release Date: 07/22/2011
+<br>Current Revision Date: 12/18/2025 <br></para>
+
+<h4>2. Required Software</h4>
+<para>Some software components need to be installed before using this instrument driver. The minimum versions of these components are listed below, and can be downloaded from the Download Site.
+<br><br>VISA 5.0 or later
+<br><br>Refer to the <i>LabVIEW Help</i> for more information about software requirements. You access the <i>LabVIEW Help</i> by selecting <i>Help&raquo;Search the LabVIEW Help</i>.</para>
+
+<h4>3. Known Issues</h4><para>
+
+To report issues or provide feedback about this instrument driver,  <a href="http://www.ni.com/en-us/support.html">please contact technical support</a>.</para>
+
+
+<br><br>Include instrument functionality not supported by the driver or known issues as necessary.<br><para></para>
+
+<h4>4. Revision History</h4>
+<para>The latest version of this and other LabVIEW and LabWindows/CVI instrument drivers can be downloaded at the <a href="http://www.ni.com/idnet">Instrument Driver Network</a>.<br>
+<br>REV 1.0, 07/22/2011<br></para> Modified by: Xueting Tan, Shanghai, China.<br> <para>Original release.<br>
+<br>REV 1.1, 10/30/2012<br></para>Modified by: Xudong Yong, Shanghai, China.<br>Add B2961A and B2962A support.<br>
+<br>New VIs:<br>Public<br>
+<li>Configure Arbitrary Waveform.vi
+<li>Configure Waveform (Exponential).vi
+<li>Configure Waveform (Ramp).vi
+<li>Configure Waveform (Sinusoid).vi
+<li>Configure Waveform (Square).vi
+<li>Configure Waveform (Trapezoid).vi
+<li>Configure Waveform (Triangle).vi
+<li>Configure Waveform (User Defined).vi
+<li>Configure Output Filter External.vi
+<li>Configure Output Resistance.vi
+<br>Private<br>
+<li>Boolean Array to String.vi
+<li>Text Array to String.vi
+<li>Extended User Data.ctl
+<li>Extended User Data.vi
+<br>Examples<br><li>Agilent B2900 Series Output User Defined Waveform.vi
+<br>Modified VIs:<br>Public<br>
+<li>Acquire Null Offset For Limit Test.vi - Not applicable for Agilent models B2961A and B2962A<br>
+<li>Reset Composite Limit Test.vi - Not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Individual Limit Test.vi - Not applicable for Agilent models B2961A and B2962A<br>
+<li>Assign CLT GPIO Pins.vi - Not applicable for Agilent models B2961A and B2962A<br>
+<li>Read Individual Limit Test Result.vi - Not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Limit Test Result Pattern.vi - Not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Limit Test Null Offset.vi - Not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Composite Limit Test.vi - Commands in default part of the case structure are not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Measurement(Current).vi - Commands in default part of the case structure are not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Measurement(Resistance).vi - Commands in default part of the case structure are not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Measurement(Voltage).vi - Commands in default part of the case structure are not applicable for Agilent models B2961A and B2962A<br>
+<li>Read Limit Test Result.vi - Commands in default part of the case structure are not applicable for Agilent models B2961A and B2962A<br>
+<li>Configure Trace Buffer.vi - One command ":TRAC[c]:FEED LIM" is not applicable for Agilent models B2961A and B2962A<br>
+<li>Enable Output.vi - Modify the specification of "Operation" and "Output Enable"<br>
+<li>Configure Sweep.vi - Modify the command from "DIR OWN" to "DIR DOWN"<br>
+<br>REV 1.1.1, 04/12/2013<br></para>Modified by: Xudong Yong, Shanghai, China.<br>
+Add notes in following VIs to point out they are only supported by Agilent models B2961A and B2962A.<br>
+<li>Arbitrary Waveform group<br>	<li>Configure Output Filter External.vi	<li>Configure Output Resistance.vi
+<br>REV 1.1.2, 02/9/2015<br></para>Initialize - Updated to include Keysight Technologies along with Agilent as a Manufacturer<br> 
+<br>REV 1.2, 05/05/2021<br></para>Modified by: Chitra Arjunan, NI, India.<br>Add B2901B,B2902B,B2911B,B2912B,B2901BL,B2910BL,B2961B,B2962B support.<br>
+<br>Modified Channel and required control documentation for all VIs<br>
+<br>Modified VIs:
+<li>Delete Math Expression.vi <br>
+<li>Send Immediate Trigger.vi <br>
+<li>Configure ARM Layer.vi <br>
+<li>Configure Composite Limit Test.vi <br>
+<li>Configure Measurement (Current).vi <br>
+<li>Configure Measurement (Resistance).vi <br>
+<li>Configure Measurement (Voltage).vi <br>
+<li>Read Limit Test Result.vi <br>
+<li>Read Spot Measurement.vi <br>
+<li>Abort.vi <br>
+<li>Initiate.vi <br>
+<li>Initialize.vi <br>
+<li>Channel List String.vi <br>
+<li>Extended User Data.vi <br>
+<li>Configure Output Filter External.vi<br>
+<br>REV 1.2.1, 08/06/2021<br></para>Modified by: Chitra Arjunan, NI, India<br>Fixed Auto Range error by rearranging the commands in <b>Configure Source.vi</b><br>
+<br>REV 1.2.2, 06/12/2023<br></para>Modified by: Jaskaran Singh, NI, India<br>Fixed 'Undefined Header' error by adding full SCPI command in <b>Configure Source.vi</b><br>
+<br>Modified Commands:
+<li>RANG -> :SOUR%s:%s:RANG<br>
+<li>TRIG:CONT -> FUNC:TRIG:CONT<br>
+<br>REV 1.3, 12/18/2025<br></para>Modified by: Siddhanth Suresh G, NI, India<br>
+<br>Added model support for B2901C,B2902C,B2911C,B2912C,B2901CL,B2910CL,B2961C and B2962C models
+<br>Added VI(s):
+<li><b>Configure Interlock Threshold level.vi</b>
+<br>Modified VI(s):
+<br><b>Enable Output.vi</b> - Updated the Default Value for 'Enable Output' according to documentation.
+<br><b>Configure Output Filter External.vi</b> - Updated SCPI command value mapping for enable external filter to reflect the correct values as per the documentation.
+<br>Modified control and VI documentation for all VIs.
+</body>
+</html>

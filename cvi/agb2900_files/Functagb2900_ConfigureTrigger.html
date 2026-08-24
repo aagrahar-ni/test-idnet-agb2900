@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ConfigureTrigger</title>
+  </head>
+  <body>
+    <h1>agb2900_ConfigureTrigger</h1>
+    <p class="syntax">
+      ViStatus agb2900_ConfigureTrigger (ViSession instrumentHandle,
+                                   ViInt32 channel, ViInt32 deviceAction,
+                                   ViInt32 triggerSource,
+                                   ViInt32 triggerCount, ViInt32 triggerDelay,
+                                   ViReal64 timerInterval,
+                                   ViBoolean triggerBypassEnabled,
+                                   ViBoolean _VI_FAR LXITriggers[],
+                                   ViInt32 arraySize);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Change Settings for trigger layer in ARM-Trigger model.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function.&nbsp;&nbsp;The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">channel</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specified channel to perform action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1 (B2901BL, B2910BL, B2901B, B2911B, B2961B)
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_2: Channel 2 (B2902B, B2912B, B2962B)
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_INSTRUMENT_CHANNEL_1: Channel 1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">deviceAction</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    For what device action to send trigger.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_DEVICE_ACTION_ACQUIRE: Acquire. For measurement action.
+    <br/>
+    AGB2900_DEVICE_ACTION_TRANSIENT: Transient. For source output action.
+    <br/>
+    AGB2900_DEVICE_ACTION_BOTH: Both. For both device action.
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_DEVICE_ACTION_BOTH: Both
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">triggerSource</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Expected trigger source for the specified device action.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_TRIGGER_SOURCE_AINT: AINT (automatic internal). Automatically selects the trigger source most suitable for the present operating mode by using the internal algorithms.
+    <br/>
+    AGB2900_TRIGGER_SOURCE_BUS: BUS. Selects the remote interface trigger. Use Send Software Trigger.vi to send trigger.
+    <br/>
+    AGB2900_TRIGGER_SOURCE_TIMER: Timer. Selects a signal internally generated every interval set by the Timer Trigger Interval control.
+    <br/>
+    AGB2900_TRIGGER_SOURCE_INT1: INT1. Selects the output of the channel 1 or 2 respectively. Available only for the 2-channel model.
+    <br/>
+    AGB2900_TRIGGER_SOURCE_INT2: INT2&nbsp;&nbsp;&nbsp;
+    <br/>
+    AGB2900_TRIGGER_SOURCE_LAN: LAN. Use LXI triggers selected by LXI Triggers.
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT1: EXT1. selects a signal from the GPIO pin n which is an output port of the Digital I/O D-sub connector on the rear panel.
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT2: EXT2
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT3: EXT3
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT4: EXT4
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT5: EXT5
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT6: EXT6
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT7: EXT7
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT8: EXT8
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT9: EXT9
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT10: EXT10
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT11: EXT11
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT12: EXT12
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT13: EXT13
+    <br/>
+    AGB2900_TRIGGER_SOURCE_EXT14: EXT14
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_TRIGGER_SOURCE_AINT: AINT
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">triggerCount</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Sets the trigger count for the specified device action.
+    <br/>
+    Valid Range:
+    <br/>
+    Min: 1
+    <br/>
+    Max: 100000 or 2147483647
+    <br/>
+    For B2901BL/B2901CL,
+    <br/>
+    Valid Range:
+    <br/>
+    Min: 1
+    <br/>
+    Max: 10000.
+    <br/>
+    Default Value:
+    <br/>
+    1
+    <br/>
+    Note(s):
+    <br/>
+    1) Infinity is not available for B2901BL, B2910BL, B2901CL and B2910CL.
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">triggerDelay</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Sets the trigger delay for the specified device action.
+    <br/>
+    Valid Range:
+    <br/>
+    0 to 100 seconds
+    <br/>
+    Default Value:
+    <br/>
+    0 second
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">timerInterval</td>
+        <td class="paramDataType">ViReal64</td>
+        <td>
+    Expected interval of the Timer trigger source for the specified device action.
+    <br/>
+    Valid Range:
+    <br/>
+    B2901BL/B2901CL: 2E-4 to 1E+5
+    <br/>
+    B2910BL/B2910CL: 5E-5 to 1E+5
+    <br/>
+    B2901B/B2902B/B2901C/B2902C: 2E-5 to 1E+5
+    <br/>
+    B2911B/B2912B/B2911C/B2912C: 1E-5 to 1E+5
+    <br/>
+    B2961B/B2962B/B2961C/B2962C: 1E-5 to 1E+5
+    <br/>
+    Default Value:
+    <br/>
+    5E-5 seconds
+    <br/>
+    For other Models:
+    <br/>
+    Valid Range: 1E-5 to 1E+5
+    <br/>
+    Default value :1E+5
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">triggerBypassEnabled</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Enables or disables a bypass for the event detector in the trigger layer.
+    <br/>
+    Valid Range:
+    <br/>
+    VI_TRUE&nbsp;&nbsp;- Enable
+    <br/>
+    VI_FALSE - Disable
+    <br/>
+    Default Value: VI_FALSE
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">LXITriggers</td>
+        <td class="paramDataType">ViBoolean[]</td>
+        <td>
+    An eight values array specifies whether or not the according LXI triggers are used for the trigger source for the specified device action.Index of 0 to 7 corresponds to LXI Trigger LAN0 to 7.&nbsp;&nbsp;&nbsp;
+    <br/>
+    Valid Range for Element:
+    <br/>
+    TRUE: Used
+    <br/>
+    FALSE: Not Used
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">arraySize</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Array size of the parameter LXITriggers
+    <br/>
+    Valid Range:
+    <br/>
+    1 to 8
+    <br/>
+    Default Value:
+    <br/>
+    1
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassARM-Trigger.html">ARM-Trigger</a><br/>
+      <a href="ClassConfigure.html">Configure</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>

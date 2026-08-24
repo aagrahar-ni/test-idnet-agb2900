@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="htmlhelp.css" type="text/css">
+    <title>agb2900_ConfigureLXIForARMTrigger</title>
+  </head>
+  <body>
+    <h1>agb2900_ConfigureLXIForARMTrigger</h1>
+    <p class="syntax">
+      ViStatus agb2900_ConfigureLXIForARMTrigger (ViSession instrumentHandle,
+                                            ViInt32 LXIEvent,
+                                            ViBoolean enableLXIEvent,
+                                            ViInt32 LXIEventType,
+                                            ViInt32 LXIEventDetection,
+                                            ViInt32 LXIEventSource,
+                                            ViChar _VI_FAR LXIEventDestination[]);
+    </p>
+    <h2 class="purpose">Purpose</h2>
+    <p class="body">
+    Configures the LXI Trigger Event for trigger layer or ARM layer.&nbsp;&nbsp;
+    <br/>
+    To use LXI Triggers, set the trigger source to LAN first.
+    </p>
+    <h2>Parameters</h2>
+    <table class="borderless" summary="Parameter help">
+      <tr>
+        <td valign="top"><em class="label">Input</em></td>
+      </tr>
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">instrumentHandle</td>
+        <td class="paramDataType">ViSession</td>
+        <td>
+    The ViSession handle that you obtain from the agb2900_Initialize function.&nbsp;&nbsp;The handle identifies a particular instrument session that can be passed to other functions.
+    <br/>
+    Default Value:&nbsp;&nbsp;None
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">LXIEvent</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specify the LAN Event to configure.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_LXI_EVENT_LAN0: LAN0
+    <br/>
+    AGB2900_LXI_EVENT_LAN1: LAN1
+    <br/>
+    AGB2900_LXI_EVENT_LAN2: LAN2
+    <br/>
+    AGB2900_LXI_EVENT_LAN3: LAN3
+    <br/>
+    AGB2900_LXI_EVENT_LAN4: LAN4
+    <br/>
+    AGB2900_LXI_EVENT_LAN5: LAN5
+    <br/>
+    AGB2900_LXI_EVENT_LAN6: LAN6
+    <br/>
+    AGB2900_LXI_EVENT_LAN7: LAN7
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_LXI_EVENT_LAN0: LAN0
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">enableLXIEvent</td>
+        <td class="paramDataType">ViBoolean</td>
+        <td>
+    Enable or disable the LXI trigger event output.
+    <br/>
+    Valid Range:
+    <br/>
+    VI_TRUE - Enabled
+    <br/>
+    VI_FALSE - Disabled
+    <br/>
+    Default Value:
+    <br/>
+    VI_FALSE
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">LXIEventType</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specify the LXI event type.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_LXI_EVENT_TYPE_ARM: ARM
+    <br/>
+    AGB2900_LXI_EVENT_TYPE_TRIGGER: Trigger
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_LXI_EVENT_EDGE_RISE: Rise
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">LXIEventDetection</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    Specify the LXI event detection.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_LXI_EVENT_DETECTION_RISE: Rise
+    <br/>
+    AGB2900_LXI_EVENT_DETECTION_FALL: Fall
+    <br/>
+    AGB2900_LXI_EVENT_DETECTION_HIGH: High
+    <br/>
+    AGB2900_LXI_EVENT_DETECTION_LOW: Low
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_LXI_EVENT_EDGE_RISE: Rise
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">LXIEventSource</td>
+        <td class="paramDataType">ViInt32</td>
+        <td>
+    An instrument-specific discrete value that specified LAN ARM-Trigger event is tied to.
+    <br/>
+    Valid Values:
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_ACQUIRE_ARM1: Waiting For Acquire Arm1
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_TRANSITION_ARM1: Waiting For Transition Arm1
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_ACQUIRE_ARM2: Waiting For Acquire Arm2
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_TRANSITION_ARM2: Waiting For Transition Arm2
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_ACQUIRE_TRIGGER1: Waiting For Acquire Trigger1
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_TRANSITION_TRIGGER1: Waiting For Transition Trigger1
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_ACQUIRE_TRIGGER2: Waiting For Acquire Trigger2
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_TRANSITION_TRIGGER2: Waiting For Transition Trigger2
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_MEASURING1: Measuring1
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_SETTLING1: Settling1
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_MEASURING2: Measuring2
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_SETTLING2: Settling2
+    <br/>
+    Default Value:
+    <br/>
+    AGB2900_LXI_EVENT_SOURCE_WAIT_FOR_ACQUIRE_ARM1: Waiting For Acquire Arm1
+        </td>
+      </tr>
+      <tr>
+        <td class="paramName">LXIEventDestination</td>
+        <td class="paramDataType">ViChar[]</td>
+        <td>
+    Specify the LXI event destination. It contains destination host name, LAN identifier and port number.
+    <br/>
+    Valid Values:
+    <br/>
+    Up to 32 ASCII characters.
+    <br/>
+    Default Value:
+    <br/>
+    VI_NULL
+        </td>
+      </tr>
+    </table>
+    <h2>Return Value</h2>
+    <table class="borderless" summary="Return value help">
+      <tr>
+        <td class="tablehead">Name</td>
+        <td class="tablehead">Type</td>
+        <td class="tablehead">Description</td>
+      </tr>
+      <tr>
+        <td class="paramName">status</td>
+        <td class="paramDataType">ViStatus</td>
+        <td>
+    Returns the status code of this operation.&nbsp;&nbsp;The status code indicates success or describes an error or warning condition. You can examine the status code from each call to an instrument driver function to determine whether an error occurred.
+    <br/>
+    To obtain a description of the last error, call the agb2900_ErrorMessage function.
+    <br/>
+    In general, you can interpret status codes as follows:
+    <br/>
+    Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meaning
+    <br/>
+    -------------------------------
+    <br/>
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success
+    <br/>
+    Positive Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    Negative Values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    This driver defines the following status codes:
+    <br/>
+    Status&nbsp;&nbsp;&nbsp;&nbsp;Description
+    <br/>
+    -------------------------------------------------
+    <br/>
+    No defined status codes.
+    <br/>
+    This instrument driver also returns errors and warnings defined by other sources.&nbsp;&nbsp;The following table defines additional status code ranges that this driver can return.
+    <br/>
+    Numeric Range (in Hex)&nbsp;&nbsp;&nbsp;Status Code Types&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    -------------------------------------------------
+    <br/>
+    3FFF0000 to 3FFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warnings
+    <br/>
+    3FFC0000 to 3FFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Warnings
+    <br/>
+    BFFF0000 to BFFFFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors
+    <br/>
+    BFFC0000 to BFFCFFFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VXIPnP&nbsp;&nbsp;&nbsp;Driver Errors
+        </td>
+      </tr>
+    </table>
+    <h2>References</h2>
+    <p class="body">
+      <a href="ClassLXI%20Event.html">LXI Event</a><br/>
+      <a href="ClassConfigure.html">Configure</a><br/>
+      <a href="Agilent%20B2900%20Series%20Precision%20SMU.html">Agilent B2900 Series Precision SMU</a><br/>
+      <a href="Alphabetical%20Function%20Index.html">Alphabetical Function Index</a><br/>
+      <a href="Hierarchical%20Function%20Index.html">Hierarchical Function Index</a><br/>
+    </p>
+  </body>
+</html>
